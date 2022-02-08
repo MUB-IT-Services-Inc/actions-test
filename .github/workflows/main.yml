@@ -21,12 +21,12 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      uses: fifsky/ssh-action@master
+      - uses: fifsky/ssh-action@master
 
-      with:
-      command: |
-      cd /var/www/html/mc242.i95-dev.com
-      git pull
-      host: ${{ secrets.serverip }}
-      user: root
-      key: ${{ secrets.key}}
+        with:
+              command: |
+                        cd /var/www/html/mc242.i95-dev.com
+                        git pull
+                                host: ${{ secrets.serverip }}
+                                user: root
+                                key: ${{ secrets.key}}
