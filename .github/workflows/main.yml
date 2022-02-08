@@ -30,4 +30,3 @@ jobs:
       host: ${{ secrets.serverip }}
       user: root
       key: ${{ secrets.key}}
-	
