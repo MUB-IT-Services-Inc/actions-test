@@ -2,8 +2,7 @@ name: remote ssh command
 on:
   # Trigger the workflow on push or pull request
   push:
-    branches:
-      - dev
+  
 jobs:
 
   build:
@@ -11,6 +10,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: executing remote ssh commands using ssh key
+	    if: github.ref == 'refs/heads/dev'
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
+        port: ${{ secrets.PORT }}
+        script: sh test.sh
+		
+	- name: executing remote ssh commands using ssh key
+	  if: github.ref == 'refs/heads/uat'
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.HOST }}
