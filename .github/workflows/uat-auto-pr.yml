@@ -17,6 +17,6 @@ jobs:
         destination_branch: "uat"
         pr_title: "Pulling ${{ github.ref }} into uat"
         pr_body: "👑 *An automated PR*"
-        pr_reviewer: "kingdonb"
-        pr_draft: true
+        pr_reviewer: "safichoudhury"
+        pr_draft: false
         github_token: ${{ secrets.GITHUB_TOKEN }}
