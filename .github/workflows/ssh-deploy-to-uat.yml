@@ -1,4 +1,4 @@
-name: SSH Deploy to UAT
+name: remote ssh command
 on:
   # Trigger the workflow on push or pull request
   push:
