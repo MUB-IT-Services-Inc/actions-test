@@ -2,10 +2,11 @@ name: SSH Deploy to UAT
 on:
   push:
     branches: ['uat']
+  pull_request:
+    types: [closed]
 jobs:
-
-  build:
-    name: Build
+  merge-PR:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
     - name: executing remote ssh commands using ssh key
