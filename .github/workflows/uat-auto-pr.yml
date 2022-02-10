@@ -19,3 +19,48 @@ jobs:
         pr_body: "👑 *An automated PR*"
         pr_draft: false
         github_token: ${{ secrets.GITHUB_TOKEN }}
+
+name: UAT Auto Merge from DEV
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  update-actions-test:
+    name: Merge dev into uat after a PR is merged
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: merge
+        uses: mtanzi/action-automerge@v1
+        id: merge
+        with:
+          github_token: ${{ github.token }}
+          source: 'dev'
+          target: 'uat'
+          webhook_url: #if present add the Slack webhook
+    
+name: SSH Deploy to UAT
+on:
+  # Trigger the workflow on push or pull request
+  push:
+    branches:
+      - uat
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: executing remote ssh commands using ssh key
+      uses: appleboy/ssh-action@master
+      with:	
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
+        port: ${{ secrets.PORT }}
+        script: sh test.sh
+  
