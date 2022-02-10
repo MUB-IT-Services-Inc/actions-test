@@ -1,4 +1,4 @@
-name: Update actions-test/uat
+name: UAT Auto Merge from DEV
 
 on:
   push:
