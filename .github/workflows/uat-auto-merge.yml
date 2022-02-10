@@ -2,8 +2,7 @@ name: UAT Auto Merge from DEV
 
 on:
   push:
-    branches:
-      - dev
+    branches: ['dev']
 
 jobs:
   update-actions-test:
