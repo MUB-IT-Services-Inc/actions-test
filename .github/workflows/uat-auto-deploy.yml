@@ -1,7 +1,7 @@
 name: SSH Deploy to UAT
 on:
   pull_request:
-    branches: [dev]
+    branches: [uat]
     types: [closed]
 jobs:
 
