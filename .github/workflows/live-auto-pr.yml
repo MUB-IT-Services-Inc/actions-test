@@ -1,7 +1,13 @@
 name: LIVE Auto-PR from UAT
 on:
   push:
-    branches: ['uat']
+    branches: ['dev']
+  pull_request:
+    branches:
+      - dev
+      - uat
+    types:
+      - closed
 
 jobs:
   pull-request:
