@@ -1,4 +1,4 @@
-name: UAT Auto-PR from DEV
+name: UAT Auto-PR DEV
 on:
   push:
     branches: ['dev']
