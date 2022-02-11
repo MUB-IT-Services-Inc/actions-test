@@ -13,14 +13,13 @@ jobs:
 
     - uses: repo-sync/pull-request@v2
       name: pull-request
-      with:
-		      source_branch: "dev"
-          destination_branch: "uat"
-          pr_title: "Pulling ${{ github.ref }} into uat"
-          pr_body: "👑 *An automated PR*"
-          pr_draft: false
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-		
+        with:
+        source_branch: "dev"
+        destination_branch: "uat"
+        pr_title: "Pulling ${{ github.ref }} into uat"
+        pr_body: "👑 *An automated PR*"
+        pr_draft: false
+        github_token: ${{ secrets.GITHUB_TOKEN }}
     - name: checkout
       uses: actions/checkout@v2
     - name: merge
@@ -31,7 +30,7 @@ jobs:
           source: 'dev'
           target: 'uat'
           webhook_url: #if present add the Slack webhook
-	- name: executing remote ssh commands using ssh key
+    - name: executing remote ssh commands using ssh key
       uses: appleboy/ssh-action@master
       with:	
         host: ${{ secrets.HOST }}
