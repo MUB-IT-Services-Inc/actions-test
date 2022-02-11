@@ -1,5 +1,14 @@
 name: SSH Deploy to UAT
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - dev
+  pull_request:
+    branches:
+      - dev
+      - uat
+    types:
+      - closed
 jobs:
   deploy:
     name: "Deploy to staging"
