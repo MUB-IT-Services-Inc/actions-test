@@ -5,7 +5,7 @@ on:
 
 jobs:
   pull-request:
-    name: Open PR to uat
+    name: Open PR to UAT
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
