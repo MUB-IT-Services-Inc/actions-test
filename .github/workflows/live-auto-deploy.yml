@@ -1,0 +1,25 @@
+name: SSH Deploy to LIVE
+on:
+  push:
+    branches:
+      - dev
+  pull_request:
+    branches:
+      - uat
+      - master
+    types:
+      - closed
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: executing remote ssh commands using ssh key
+      uses: appleboy/ssh-action@master
+      with:	
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
+        port: ${{ secrets.PORT }}
+        script: sh test-live.sh
