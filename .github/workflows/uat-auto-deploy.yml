@@ -1,13 +1,10 @@
 name: SSH Deploy to UAT
-on:
-  pull_request:
-    branches: [uat]
-    types: [closed]
+on: [push, pull_request]
 jobs:
-
-  build:
-    name: Build
+  deploy:
+    name: "Deploy to staging"
     runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/uat'
     steps:
     - name: executing remote ssh commands using ssh key
       uses: appleboy/ssh-action@master
