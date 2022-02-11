@@ -1,0 +1,39 @@
+name: uat-pr-merge-deploy-master
+on:
+  pull_request:
+    branches: ['uat']
+    types: ['closed']
+
+jobs:
+  pull-request:
+    name: Open PR to MASTER
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      name: checkout
+
+    - uses: repo-sync/pull-request@v2
+      name: pull-request
+      with:
+        destination_branch: "master"
+        pr_title: "Pulling ${{ github.ref }} into master"
+        pr_body: "👑 *An automated PR*"
+        pr_draft: false
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+    - name: checkout
+      uses: actions/checkout@v2
+    - name: merge
+      uses: mtanzi/action-automerge@v1
+      id: merge
+      with:
+          github_token: ${{ github.token }}
+          source: 'uat'
+          target: 'master'
+    - name: executing remote ssh commands using ssh key
+      uses: appleboy/ssh-action@master
+      with:	
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
+        port: ${{ secrets.PORT }}
+        script: sh test-live.sh
