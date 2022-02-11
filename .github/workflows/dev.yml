@@ -1,4 +1,4 @@
-name: UAT Auto-PR DEV
+name: dev-pr-merge-deploy-uat
 on:
   push:
     branches: ['dev']
