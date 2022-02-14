@@ -1,11 +1,12 @@
-
+name: uat-pr-merge-deploy-master
 on:
-  push:
-    branches: ['dev']
+  pull_request:
+    branches: ['uat']
+    types: ['synchronize']
 
 jobs:
   pull-request:
-    name: Open PR to UAT
+    name: Open PR to MASTER
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -14,8 +15,8 @@ jobs:
     - uses: repo-sync/pull-request@v2
       name: pull-request
       with:
-        destination_branch: "uat"
-        pr_title: "Pulling ${{ github.ref }} into uat"
+        destination_branch: "master"
+        pr_title: "Pulling ${{ github.ref }} into master"
         pr_body: "👑 *An automated PR*"
         pr_draft: false
         github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -26,8 +27,8 @@ jobs:
       id: merge
       with:
           github_token: ${{ github.token }}
-          source: 'dev'
-          target: 'uat'
+          source: 'uat'
+          target: 'master'
     - name: executing remote ssh commands using ssh key
       uses: appleboy/ssh-action@master
       with:	
@@ -35,4 +36,4 @@ jobs:
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.KEY }}
         port: ${{ secrets.PORT }}
-        script: sh test.sh
+        script: sh test-live.sh
