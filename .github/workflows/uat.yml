@@ -1,9 +1,7 @@
 name: uat-pr-merge-deploy-master
 on:
-  pull_request:
-    branches: 
-      - uat
-    types: [closed]
+  push:
+    branches: ['uat']
 
 jobs:
   pull-request:
