@@ -1,8 +1,7 @@
 name: uat-pr-merge-deploy-master
 on:
-  pull_request:
+  push:
     branches: ['uat']
-    types: ['synchronize']
 
 jobs:
   pull-request:
@@ -19,14 +18,14 @@ jobs:
         pr_title: "Pulling ${{ github.ref }} into master"
         pr_body: "👑 *An automated PR*"
         pr_draft: false
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{secrets.actions-test-token}}
     - name: checkout
       uses: actions/checkout@v2
     - name: merge
       uses: mtanzi/action-automerge@v1
       id: merge
       with:
-          github_token: ${{ github.token }}
+          github_token: ${{ secrets.actions-test-token }}
           source: 'uat'
           target: 'master'
     - name: executing remote ssh commands using ssh key
