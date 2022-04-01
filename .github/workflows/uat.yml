@@ -25,7 +25,7 @@ jobs:
       uses: mtanzi/action-automerge@v1
       id: merge
       with:
-          github_token: ${{ github.token }}
+          github_token: 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
           source: 'uat'
           target: 'master'
     - name: executing remote ssh commands using ssh key
