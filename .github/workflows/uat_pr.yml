@@ -10,15 +10,18 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       name: checkout
-
-    - uses: repo-sync/pull-request@v2
+    - uses: repo-sync/pull-request@v2    
       name: pull-request
-    - name: Add Pull Request Reviewer
-      uses: AveryCameronUofR/add-reviewer-gh-action@1.0.3
       with:
         destination_branch: "master"
         pr_title: "Pulling ${{ github.ref }} into master"
         pr_body: "👑 *An automated PR*"
         pr_draft: false
-        reviewers: "safichoudhury,skmujahed"
         github_token: ${{ secrets.GITHUB_TOKEN }}
+    - name: "Assign Reviewers to PR"
+      uses: itsOliverBott/assign-pr-reviewers@release
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        users: "safichoudhury,skmujahed" # comma-separated (example: "itsOliverBott, SantaClaus, b4tman, sp0derman")
+        ignore-drafts: true # defaults to false if not provided
+
