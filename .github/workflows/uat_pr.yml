@@ -21,7 +21,7 @@ jobs:
     - name: "Assign Reviewers to PR"
       uses: itsOliverBott/assign-pr-reviewers@release
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        users: "safichoudhury,skmujahed" # comma-separated (example: "itsOliverBott, SantaClaus, b4tman, sp0derman")
+        token: ${{ secrets.GITHUB_TOKEN }}
+        users: "safichoudhury, skmujahed" # comma-separated (example: "itsOliverBott, SantaClaus, b4tman, sp0derman")
         ignore-drafts: true # defaults to false if not provided
 
