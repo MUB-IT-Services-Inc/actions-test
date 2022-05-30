@@ -18,10 +18,3 @@ jobs:
         pr_body: "👑 *An automated PR*"
         pr_draft: false
         github_token: ${{ secrets.GITHUB_TOKEN }}
-    - name: "Assign Reviewers to PR"
-      uses: itsOliverBott/assign-pr-reviewers@release
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        users: "safichoudhury, skmujahed" # comma-separated (example: "itsOliverBott, SantaClaus, b4tman, sp0derman")
-        ignore-drafts: true # defaults to false if not provided
-
