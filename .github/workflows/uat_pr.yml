@@ -13,14 +13,12 @@ jobs:
 
     - uses: repo-sync/pull-request@v2
       name: pull-request
+    - name: Add Pull Request Reviewer
+      uses: AveryCameronUofR/add-reviewer-gh-action@1.0.3
       with:
         destination_branch: "master"
         pr_title: "Pulling ${{ github.ref }} into master"
         pr_body: "👑 *An automated PR*"
         pr_draft: false
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-    - name: Add Pull Request Reviewer
-      uses: AveryCameronUofR/add-reviewer-gh-action@1.0.3
-      with: 
         reviewers: "safichoudhury,skmujahed"
-        token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
